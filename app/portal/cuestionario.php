@@ -21,8 +21,8 @@ if(isset($_SESSION['id']) && $_SESSION['tipouser']==2){
                                 $r2 =pg_num_rows($q2);
                                 break;
                             }else if($j==1 && empty($_SESSION['n_pregunta'])){
-                                echo "entro acá";
-                                echo $s2 = "select * from preguntas where id='".$dg['id']."' ";
+                                //echo "entro acá";
+                                $s2 = "select * from preguntas where id='".$dg['id']."' ";
                                 $q2 =pg_query($conexion, $s2);
                                 $r2 =pg_num_rows($q2);
                                 $_SESSION['n_pregunta']=2;
@@ -37,7 +37,7 @@ if(isset($_SESSION['id']) && $_SESSION['tipouser']==2){
 
     if(isset($_POST['guardar'])){ // Enviamos la otra pregunta aleatoria.
 
-        echo "valor de la pregunta: ".$_SESSION['n_pregunta']+=1;
+       $_SESSION['n_pregunta']+=1;
     }
 ?>
 
