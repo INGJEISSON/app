@@ -36,44 +36,58 @@ if(!isset($_SESSION['id'])){
 
       <form action="../../index3.html" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id='usuario' placeholder="Nombre de usuario">
+          <input type="text" class="form-control" id='usuario' placeholder="Ingrese correo electrónico ó identificación">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
           <input type="password" class="form-control" id='clave' placeholder="Contraseña">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Recordarme
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="button" id='ingresar' class="btn btn-success btn-block">Ingresar</button>
+     
+          <div class="col-12">
+            <button type="button" id='enviar_clave' class="btn btn-success btn-block">Enviar clave</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">RECUPERAR CONTRASEÑA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         Se ha enviado su contraseña a su correo electrónico registrado, por favor revise en su bandeja de 
+         entrada o correo no deseado (SPAM)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">LOGIN</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">RECUPERAR CONTRASEÑA</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -94,7 +108,7 @@ if(!isset($_SESSION['id'])){
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">LOGIN</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">RECUPERAR CONTRASEÑA</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -122,11 +136,9 @@ if(!isset($_SESSION['id'])){
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="pasword_reset.php">Perdió su clave?</a>
+        <a href="../app/">Iniciar sesión</a>
       </p>
-      <p class="mb-0">
-        <a href="register.php" class="text-center">Registrate como nuevo miembro</a>
-      </p>
+     
     </div>
     <!-- /.login-card-body -->
   </div>
@@ -144,22 +156,22 @@ if(!isset($_SESSION['id'])){
         <script>
           $(document).ready(function(){
 
-                      $("#ingresar").click(function(){  
+                      $("#enviar_clave").click(function(){  
 
                        
                           var usuario = $("#usuario").val();
-                          var clave = $("#clave").val();
+                        
 
-                              if(usuario!="" && clave != ""){
+                              if(usuario!=""){
                                 //alert("ingreso aqui");
-                                    var datos='login='+1+'&usuario='+usuario+'&clave='+clave;
+                                    var datos='password_reset='+1+'&usuario='+usuario;
                                      $.ajax({
                                        type: "POST",
                                        data: datos,
                                        url: 'modelos/funciones.php',
                                        success: function (valor){
                                           if(valor==1)
-                                          parent.location='portal';
+                                          $('#exampleModalCenter1').modal('show');
                                           else if(valor==2)
                                           $('#exampleModalCenter2').modal('show');
                                           else if (valor==3)
@@ -167,7 +179,7 @@ if(!isset($_SESSION['id'])){
                                        }
                                      })
                               }else{
-                                alert("Por favor ingrese usuario y clave")
+                                alert("Por favor ingrese correo o identificación")
                               }
 
                       })

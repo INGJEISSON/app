@@ -29,7 +29,7 @@
     
     function ver_plantillas(){
             include '../config.php';
-            $sql="select plantilla.id, plantilla.nombre, plantilla.descripcion, tipo_plantilla.descripcion as tipoplantilla, estado.descripcion as estado
+            $sql="select plantilla.id, plantilla.nombre, plantilla.descripcion, tipo_plantilla.descripcion as tipoplantilla, estado.descripcion as estado, plantilla.cant_preguntas
             from plantilla, tipo_plantilla, estado where plantilla.tipo=tipo_plantilla.id and plantilla.id_estado=estado.id
             ";
             $query = pg_query($conexion, $sql);
@@ -51,6 +51,7 @@
                                       "tipo":"'.$datos['tipoplantilla'].'",
                                       "estado":"'.$datos['estado'].'",
                                       "n_preguntas":"'.$n_preguntas.'",
+                                      "cant_preguntas":"'.$datos['cant_preguntas'].'",
                                       "accion":"'.$accion.'"
                               },';
                              // $data['data'][] = $tabla;
@@ -90,7 +91,7 @@
 
 
                       
-                     $accion= '<a href=\"crear_opciones.php?id='.$datos["id"].'&nombre='.utf8_encode($datos['nombre']).'\" tittle=\"Revisar\"><p class=\"icon-note lg\">Crear opciones</p></a>';
+                     $accion= '<a href=\"crear_opciones.php?id='.$datos["id"].'&nombre='.utf8_encode($datos['titulo']).'\" tittle=\"Revisar\"><p class=\"icon-note lg\">Crear opciones</p></a>';
                          $tabla.='{ 
                                       "#":"'.$i.'",
                                       "titulo":"'.utf8_encode($datos['titulo']).'",
@@ -113,7 +114,7 @@
 
     function ver_opciones($id){
         include '../config.php';
-             $sql="select opciones.id, plantilla.nombre as plantilla, opciones.nombre, opciones.valor, preguntas.nombre as pregunta
+             $sql="select opciones.id, plantilla.nombre as plantilla, opciones.nombre, opciones.valor, preguntas.titulo as pregunta
              from opciones, preguntas, plantilla
              where opciones.id_pregunta=preguntas.id and preguntas.id_plantilla=plantilla.id
              and opciones.id_pregunta = '".$id."'
@@ -153,14 +154,14 @@
                     return "2";
                 }
     }
-    function crear_plantilla($nombre, $descripcion, $tipo, $estado, $user){
+    function crear_plantilla($nombre, $descripcion, $tipo, $estado, $user, $cant_preguntas){
         @include '../config.php';
         $valida_plant = consul_plantilla($nombre,$tipo);
                 if($valida_plant==2){
 
                     // $in = "insert into plantilla (nombre, descripcion, tipo, id_estado, id_user) 
-                     $in = "insert into plantilla (nombre, descripcion, tipo, id_estado) 
-                    values('".utf8_decode($nombre)."', '".utf8_decode($descripcion)."', '".$tipo."', '".$estado."') ";
+                     $in = "insert into plantilla (nombre, descripcion, tipo, id_estado, cant_preguntas) 
+                    values('".utf8_decode($nombre)."', '".utf8_decode($descripcion)."', '".$tipo."', '".$estado."', '".$cant_preguntas."') ";
                     $qin=pg_query($conexion, $in);
 
                         if($qin)
