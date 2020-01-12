@@ -10,6 +10,9 @@ include('model_user.php'); // Modelos de usuario
             
 
         }
+        if(isset($_POST['password_reset'])){
+            echo $forgot_password = forgot_password($_POST['usuario']);
+        }
 
         if(isset($_POST['g_plantilla'])){ // Gestor de usuario
 

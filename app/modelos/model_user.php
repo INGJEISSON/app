@@ -1,6 +1,40 @@
 <?php
 // En desarrollo ..
+    
+    function consul_user($usuario){
+        include '../config.php';
+        $sql ="select id from users where email='".trim($usuario)."' or id_usuario='".trim($id_usuario)."' or nom_usuario='".trim($nom_usuario)."' ";
+        $query=pg_query($conexion, $sql);
+        $rows=pg_num_rows($query);
+            if($rows)
+             return "1";
+            else
+            return "2";
+    }
+    function forgot_password($usuario){
+        include '../config.php';
+        $consul_user = consul_user($usuario);
 
+            if($consul_user==1){
+
+                $sql ="select clave, email from users where email='".trim($usuario)."' or id_usuario='".trim($usuario)."' or nom_usuario='".trim($usuario)."' ";
+                $query=pg_query($conexion, $sql);
+                $rows=pg_num_rows($query);
+                $datos = pg_fetch_assoc($query);
+
+                $correo_user = $datos['email'];
+                $clave = $datos['clave'];
+                // enviamos contraseña;
+                $destino = $correo_user;
+                $asunto = "Recordatorio de contraseña";
+                $mensaje = "Tu contraseña es: ".$clave;
+                $enviar_password = enviar_mail ($destino, $asunto, $mensaje);
+
+                return "1";
+            }else
+            return "2";
+       
+    }
     function autenticar($usuario, $clave){
 
             include '../config.php';
