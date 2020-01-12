@@ -53,7 +53,7 @@ if(!isset($_SESSION['id'])){
         </div> -->
         <div class="row">
      
-          <div class="col-4">
+          <div class="col-12">
             <button type="button" id='enviar_clave' class="btn btn-success btn-block">Enviar clave</button>
           </div>
           <!-- /.col -->
@@ -179,7 +179,7 @@ if(!isset($_SESSION['id'])){
                                        }
                                      })
                               }else{
-                                alert("Por favor ingrese usuario y clave")
+                                alert("Por favor ingrese correo o identificación")
                               }
 
                       })

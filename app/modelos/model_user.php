@@ -1,9 +1,10 @@
 <?php
-// En desarrollo ..
+// En desarrollo .
+include('comuni.php');
     
     function consul_user($usuario){
-        include '../config.php';
-        $sql ="select id from users where email='".trim($usuario)."' or id_usuario='".trim($id_usuario)."' or nom_usuario='".trim($nom_usuario)."' ";
+       @include '../config.php';
+        $sql ="select id from users where email='".trim($usuario)."' or id_usuario='".trim($usuario)."' or nom_usuario='".trim($usuario)."' ";
         $query=pg_query($conexion, $sql);
         $rows=pg_num_rows($query);
             if($rows)
@@ -12,7 +13,7 @@
             return "2";
     }
     function forgot_password($usuario){
-        include '../config.php';
+        @include '../config.php';
         $consul_user = consul_user($usuario);
 
             if($consul_user==1){
