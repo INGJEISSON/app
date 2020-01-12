@@ -94,7 +94,8 @@
         <div class="input-group mb-3">
             <select class='form-control' id='grado' required>
                 <option value="">SELECCIONE GRADO</option>
-                <option value="1">PRIMERO</option>
+                <option value="2">DECIMO</option>
+                <option value="3">ONCE</option>
             </select> 
         </div>
         <div class="row">
