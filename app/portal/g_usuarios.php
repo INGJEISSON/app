@@ -35,6 +35,7 @@ if(isset($_SESSION['id'])){
    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script type="text/javascript" src="../librerias/js/funciones.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -178,70 +179,97 @@ if(isset($_SESSION['id'])){
             <!-- small box -->
               <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">CREAR UNA PLANTILLA</h3>
+                <h3 class="card-title">CREAR UN USUARIO</h3>
               </div>
               <div class="card-body">
                                
-                <form>  
-                               <label for="email_address">(*) TIPO</label>
-                                <div class="form-group">
-                                    <select class='form-control' id='tipo'>
-                                        <option value="" >SELECCIONE</option>
-                                        <option value="1">CUESTIONARIO</option>
-                                    </select>
-                                </div>
-                                <label for="email_address">(*) NOMBRE</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" id="nombre" class="form-control" placeholder="INTRODUZCA UN NOMBRE DE LA PLANTILLA">
-                                    </div>
-                                </div>
-                                <label for="email_address">(*) DESCRIPCION</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" id="descripcion" class="form-control" placeholder="INTRODUZCA UNA DESCRIPCIÓN">
-                                    </div>
-                                </div>
-
-                              
-
-                                <label for="email_address">(*) CANTIDAD MINIMA DE PREGUNTAS</label>
-                                <div class="form-group">
-                                    
-                                        <select class='form-control' id='cant_preguntas'>
-                                                <option value="">SELECCIONE</option>
-                                                <?php for($i=1;$i<=999;$i++){ ?>
-
-                                                  <option value="<?= $i ?>"><?php echo $i ?></option>
-                                                <?php } ?>
-                                         </select>
-                                    
-                                </div>
-
-                                <label for="email_address">(*) ESTADO</label>
-                                <div class="form-group">
-                                    
-                                        <select class='form-control' id='estado'>
-                                                <option value="">SELECCIONE</option>
-                                                <option value="1">HABILITADO</option>
-                                                <option value="2">DESHABILITADO</option>
-                                         </select>
-                                    
-                                </div>
-                                
-                                <br>
-                              
+                <form class="needs-validation">  
+                        <div class="input-group mb-3">
+                            <select class='form-control' id='tipo' required>
+                                <option value="">TIPO DE USUARIO</option>
+                                <option value="2">ESTUDIANTE</option>
+                                <option value="1">ADMINISTRADOR</option>
+                            </select> 
+                        </div>
+                                <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='id_usuario' placeholder="Identificación" onKeyPress="return soloNumeros(event)" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='nom_usuario'  placeholder="Nombre de usuario" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='nombre' placeholder="Nombres" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="input-group mb-3">
+                        <input type="text" class="form-control" id='apellidos' placeholder="Apellidos" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                        <input type="email" class="form-control" id='email' placeholder="Email ó correo electrónico" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="input-group mb-3">
+                        <input type="password" class="form-control" id='clave' placeholder="Contraseña" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <select class='form-control' id='colegio'>
+                                <option value="">SELECCIONE INSTITUCION</option>
+                                <option value="1">MASTER</option>
+                            </select> 
+                        <!-- <input type="password" class="form-control" placeholder="Colegio">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            
+                            </div>
+                        </div> -->
+                        </div>
+                        <div class="input-group mb-3">
+                            <select class='form-control' id='grado'>
+                                <option value="">SELECCIONE GRADO</option>
+                                <option value="1">PRIMERO</option>
+                            </select> 
+                        </div>
+                                                <br>
+                                <button class='btn btn-success' id='guardar'>GUARDAR</button>
                             </form>
               </div>
               
-              <button class='btn btn-success' id='guardar'>GUARDAR</button>
+             
               
                 <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                PLANTILLAS CREADAS
+                                USUARIOS CREADOS
                             </h2>
                             <!-- <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -263,12 +291,13 @@ if(isset($_SESSION['id'])){
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>TIPO</th>
-                                            <th>NOMBRE</th>
-                                            <th>DESCRIPCION</th>                                          
-                                            <th>ESTADO</th>
-                                            <th>NÚMERO DE PREGUNTAS</th>
-                                            <th>CANTI. MIN DE PREGUNTAS</th>
+                                            <th>IDENTIFICACION</th>
+                                            <th>NOMBRES Y APELLIDOS</th>
+                                            <th>NOMBRE DE USUARIO</th>                                          
+                                            <th>EMAIL</th>
+                                            <th>COLEGIO</th>
+                                            <th>GRADO</th>
+                                            <th>TIPO DE USUARIO</th>
                                             <th>ACCION</th>
                                         </tr>
                                     </thead>
@@ -374,6 +403,27 @@ if(isset($_SESSION['id'])){
 <script src="../dist/js/demo.js"></script>
 </body>
 </html>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('button', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
        <script>
 
 $(document).ready(function () {
@@ -386,18 +436,19 @@ $(document).ready(function () {
             responsive: true,
             stateSave: true,
             "ajax": {
-                "url": "../../app/modelos/funciones.php?listar=1",
+                "url": "../../app/modelos/funciones.php?listar_users=1",
                 "type": "POST"                
             },
             "columns": [
 
                 { "data": "#" },
-                { "data": "tipo" },
+                { "data": "id_usuario" },
                 { "data": "nombre" },
-                { "data": "descripcion" },               
-                { "data": "estado" },
-                { "data": "n_preguntas" },
-                { "data": "cant_preguntas" },
+                { "data": "username" },               
+                { "data": "email" },
+                { "data": "colegio" },
+                { "data": "grado" },
+                { "data": "tipouser" },
                 { "data": "accion" }
             ],
             "oLanguage": {
@@ -441,43 +492,49 @@ $(document).ready(function () {
         // $("#menu_app").load('../template/menu.html');
         
                 $("#guardar").click(function(){
+                          var id_usuario = $("#id_usuario").val();
+                          var nombre = $("#nombre").val();
+                          var apellidos = $("#apellidos").val();
+                          var email = $("#email").val();
+                          var colegio = $("#colegio").val();
+                          var grado = $("#grado").val();
+                          var nom_usuario = $("#nom_usuario").val();
+                          var tipo = $("#tipo").val();
+                          var clave= $("#clave").val();
 
-                        var nombre = $("#nombre").val();
-                        var descripcion = $("#descripcion").val();
-                        var tipo = $("#tipo").val();
-                        var estado = $("#estado").val();
-                        var user = 2;
-                        var cant_preguntas = $("#cant_preguntas").val();
 
-                        var datos ='g_plantilla='+1+'&crear='+1+'&nombre='+nombre+'&descripcion='+descripcion+'&tipo='+tipo+'&estado='+estado+'&user='+user+'&cant_preguntas='+cant_preguntas;
 
-                            if(nombre!="" && descripcion!="" && tipo!="" && estado!="" && cant_preguntas!="" ){
-
-                                    $.ajax({
-                                            type:"POST",
-                                            url: "../../app/modelos/funciones.php",
-                                            data: datos,
-                                            success: function(valor){
-                                                if(valor==1){
-                                                    alert("Plantilla creada correctamente");
+                              if(id_usuario!="" && nom_usuario != "" && nombre != "" && apellidos != "" 
+                              && email != "" && colegio != "" && grado != "" && clave !="" && tipo!="" ){
+  
+                                    var datos='g_users='+1+'&crea_user='+1+'&id_usuario='+id_usuario+'&nom_usuario='+nom_usuario
+                                    +'&nombre='+nombre+'&apellidos='+apellidos+'&email='+email+'&colegio='+colegio+'&grado='+grado+'&tipo='+tipo+'&clave='+clave;
+                                     $.ajax({
+                                       type: "POST",
+                                       data: datos,
+                                       url: "../../app/modelos/funciones.php",
+                                       success: function (valor){
+                                          if(valor==1){
+                                             alert("Usuario registrado correctamente")
                                                 //swal("", "Plantilla creada correctamente", "success");
                                                  $('#table_id').dataTable().fnDestroy();
                                                  $('#table_id').DataTable({
                                                         responsive: true,
                                                         stateSave: true,
                                                         "ajax": {
-                                                            "url": "../../app/modelos/funciones.php?listar=1",
+                                                            "url": "../../app/modelos/funciones.php?listar_users=1",
                                                             "type": "POST"
                                                         },
                                                         "columns": [
 
                                                             { "data": "#" },
-                                                            { "data": "tipo" },
+                                                            { "data": "id_usuario" },
                                                             { "data": "nombre" },
-                                                            { "data": "descripcion" },
-                                                            { "data": "estado" },
-                                                            { "data": "n_preguntas" },
-                                                            { "data": "cant_preguntas" },
+                                                            { "data": "username" },               
+                                                            { "data": "email" },
+                                                            { "data": "colegio" },
+                                                            { "data": "grado" },
+                                                            { "data": "tipouser" },
                                                             { "data": "accion" }
                                                         ],
                                                         "oLanguage": {
@@ -515,8 +572,8 @@ $(document).ready(function () {
 
                                                     });
                                                 }
-                                                else if(valor==3)
-                                                alert ("El nombre de la plantilla ya se encuentra creado, intente con otro");
+                                                else if(valor==2)
+                                                alert ("El nombre del usuario ya se encuentra creado, intente con otro");
                                                 //swal("Ops", "El nombre de la plantilla ya se encuentra creado, intente con otro", "warning");
                                                 else
                                                 alert("Ocurrio un problema aquí, comunícate con el administrador");

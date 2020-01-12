@@ -162,50 +162,8 @@ if(isset($_SESSION['id'])){
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-   <center><a href="#" class="brand-link navbar-white">
-      <img src="http://sitmach.mundosoluciones.com.co/demo/pages/examples/logo_final.png"  width='64' height='64'>
-      <span class="brand-text font-weight-light">SICMATCH</span>
-    </a></center>
-
     <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"><?PHP echo $_SESSION['usuario'] ?></a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <?PHP include('menu.php') ?>
-      <!-- /.sidebar-menu -->
-    </div>
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-          
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-             
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+    <?php include ('header.php') ?>
 
     <!-- Main content -->
     <section class="content">
@@ -218,12 +176,12 @@ if(isset($_SESSION['id'])){
             <!-- small box -->
               <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">CREAR PREGUNTAS DE PLANTILLA - <?PHP echo $_GET['nombre'] ?></h3>
+                <h3 class="card-title">CREAR PREGUNTAS DE LA PLANTILLA - <?PHP echo $_GET['nombre'] ?></h3>
               </div>
               <div class="card-body">
                                
              <form>                               
-                                <label for="email_address">TIPO DE PREGUNTA</label>
+                                <label for="email_address">(*) TIPO DE PREGUNTA</label>
                                 <div class="form-group">
                                 
                                     <select class='form-control' id='tipo'>
@@ -234,35 +192,36 @@ if(isset($_SESSION['id'])){
                                     </select>
                                 
                                 </div>
-                                <label for="email_address">TÍTULO</label>
+                                <label for="email_address">(*) NOMBRE DE LA PREGUNTA</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="titulo" class="form-control" placeholder="INTRODUZCA UN TÍTULO DE LA PREGUNTA">
+                                        <input type="text" id="titulo" class="form-control" placeholder="INTRODUZCA NOMBRE DE LA PREGUNTA">
                                     </div>
                                 </div>
             
-                                <label for="email_address">NOMBRE</label>
+                                <label for="email_address">DESCRIPCION DETALLADA DE LA PREGUNTA (OPCIONAL)</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="nombre" class="form-control" placeholder="INTRODUZCA UNA NOMBRE">
+                                      <textarea id="nombre" class="form-control" placeholder="INTRODUZCA UNA DESCRIPCION DETALLADA DE LA PREGUNTA "></textarea>
+                                        
                                     </div>
                                 </div>
-                                <label for="email_address">COMPETENCIA</label>
+                                <label for="email_address">(*) COMPETENCIA</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" id="competencia" class="form-control" placeholder="INTRODUZCA NOMBRE DE COMPONTENCIA">
                                     </div>
                                 </div>
-                                <label for="email_address">COMPONENTE</label>
+                                <label for="email_address">(*) COMPONENTE</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" id="componente" class="form-control" placeholder="INTRODUZCA EL NOMBRE DEL COMPONENTE">
                                     </div>
                                 </div>
-                                <label for="email_address">AYUDA (<b>Opcional</b>)</label>
+                                <label for="email_address">(*) PROCEDIMIENTO LÓGICO</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="ayuda" class="form-control" placeholder="¿AYUDA DIDACTIVA?">
+                                        <input type="text" id="ayuda" class="form-control" placeholder="PROCEDIMIENTO LÓGICO">
                                     </div>
                                 </div>
                                 
@@ -273,7 +232,7 @@ if(isset($_SESSION['id'])){
                                     </div>
                                 </div>
 
-                                <label for="email_address">ESTADO</label>
+                                <label for="email_address">(*) ESTADO</label>
                                 <div class="form-group">
             
                                     <select class='form-control' id='estado'>
@@ -310,8 +269,8 @@ if(isset($_SESSION['id'])){
                                                         <tr>
                                                             <th>#</th>
                                                             <th>PLANTILLA</th>
-                                                            <th>TITULO</th>
                                                             <th>NOMBRE</th>
+                                                            <th>DESCRIPCION</th>
                                                             <th>TIPO</th>
                                                             <th>RESPUESTA</th>
                                                             <th>CANT OPCIONES</th>

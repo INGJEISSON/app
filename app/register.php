@@ -17,6 +17,7 @@
  <link rel="stylesheet" href="dist/css/adminlte.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script type="text/javascript" src="librerias/js/funciones.js"></script>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -29,16 +30,16 @@
           <p class="login-box-msg"><img src='logo_final.png' width='64' height='64'></p>
       <p class="login-box-msg">Registarse como nuevo miembro</p>
 
-      <form action="../../index.html" method="post">
+      <form  class="needs-validation">
            <div class="input-group mb-3">
-          <input type="number" class="form-control" id='id_usuario' placeholder="Identificación">
+          <input type="text" class="form-control" id='id_usuario' placeholder="Identificación" onKeyPress="return soloNumeros(event)" required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id='nom_usuario' placeholder="Nombre de usuario">
+          <input type="text" class="form-control" id='nom_usuario' placeholder="Nombre de usuario" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -46,7 +47,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="text" class="form-control" id='nombre' placeholder="Nombres">
+          <input type="text" class="form-control" id='nombre' placeholder="Nombres" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -54,7 +55,7 @@
           </div>
         </div>
          <div class="input-group mb-3">
-          <input type="text" class="form-control" id='apellidos' placeholder="Apellidos">
+          <input type="text" class="form-control" id='apellidos' placeholder="Apellidos" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -63,7 +64,7 @@
         </div>
          
         <div class="input-group mb-3">
-          <input type="email" class="form-control" id='email' placeholder="Email ó correo electrónico">
+          <input type="email" class="form-control" id='email' placeholder="Email ó correo electrónico" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -71,7 +72,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id='clave' placeholder="Contraseña">
+          <input type="password" class="form-control" id='clave' placeholder="Contraseña"  required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -79,8 +80,8 @@
           </div>
         </div>
          <div class="input-group mb-3">
-            <select class='form-control' id='colegio'>
-                <option value="">SELECCIONE</option>
+            <select class='form-control' id='colegio' required>
+                <option value="">SELECCIONE INSTITUCION</option>
                 <option value="1">MASTER</option>
             </select> 
           <!-- <input type="password" class="form-control" placeholder="Colegio">
@@ -91,8 +92,8 @@
           </div> -->
         </div>
         <div class="input-group mb-3">
-            <select class='form-control' id='grado'>
-                <option value="">SELECCIONE</option>
+            <select class='form-control' id='grado' required>
+                <option value="">SELECCIONE GRADO</option>
                 <option value="1">PRIMERO</option>
             </select> 
         </div>
@@ -106,8 +107,9 @@
             <!--</div>-->
           </div>
           <!-- /.col -->
-          <div class="col-4">
-            <button type="button" id='registrar' class="btn btn-success btn-block">Registrar</button>
+          <div class="col-12">
+          <button  id='registrar' class="btn btn-success btn-block">REGISTRAR</button>
+        
           </div>
           <!-- /.col -->
         </div>
@@ -181,6 +183,27 @@
 <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('button', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
 
 <script>
           $(document).ready(function(){

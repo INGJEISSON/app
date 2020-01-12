@@ -163,50 +163,7 @@ if(isset($_SESSION['id'])){
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary">
-    <!-- Brand Logo -->
-    <center><a href="#" class="brand-link navbar-white">
-      <img src="http://sitmach.mundosoluciones.com.co/demo/pages/examples/logo_final.png"  width='64' height='64'>
-      <span class="brand-text font-weight-light">SICMATCH</span>
-    </a></center>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"><?PHP echo $_SESSION['usuario'] ?></a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <?PHP include('menu.php') ?>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-          
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-         
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+  <?php include ('header.php') ?>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -220,26 +177,50 @@ if(isset($_SESSION['id'])){
             <!-- small box -->
               <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">CREAR OPCIONES DE PREGUNTA - <?php echo $_GET['nombre'] ?></h3>
+                <h3 class="card-title">CREAR OPCIONES DE LA PREGUNTA - <?php echo $_GET['nombre'] ?></h3>
               </div>
               <div class="card-body">
                                
                      <form>     
-                                <label for="email_address">NOMBRE</label>
+                                
                                 <div class="form-group">
+                                <label for="tipo">(*) TIPO DE OPCIÓN</label>
+                                    <select class='form-control' id='tipo'>
+                                        <option value="" >SELECCIONE</option>
+                                        <!--<option value="1" >ABIERTA</option>-->
+                                        <option value="1" >TEXTO</option>
+                                        <option value="2" >IMAGEN</option>
+                                        <!--<option value="4" >ARCHIVO</option>-->
+                                    </select>
+                                
+                                </div>
+                              
+                               
+                                <div class="form-group" id='text_opcion'>
+                                   <label for="nombre">(*) NOMBRE LA OPCIÓN</label>
                                     <div class="form-line">
-                                        <input type="text" id="nombre" class="form-control" placeholder="INTRODUZCA UN NOMBRE">
+                                        <input type="text" id="nombre" class="form-control" placeholder="INTRODUZCA NOMBRE DE LA OPCIÓN">
                                     </div>
                                 </div>
-                                <label for="email_address">VALOR (<b>Opcional</b>)</label>
+
+                               
+                                <div class="form-group" id='arch_opcion'>
+                                <label for="archivo">ARCHIVO (<b>Opcional</b>)</label>
+                                    <div class="form-line">
+                                     <input type="file" id="archivo" class="form-control">
+                                    </div>
+                                </div>
+                               
                                 <div class="form-group">
+                                <label for="valor">VALOR (<b>Opcional</b>)</label>
                                     <div class="form-line">
                                         <input type="number" id="valor" class="form-control" placeholder="INTRODUZCA VALOR">
                                     </div>
                                 </div>
 
-                                <label for="email_address">¿RESPUESTA CORRECTA?</label>
+                               
                                 <div class="form-group">
+                                <label for="resp_correcta">¿RESPUESTA CORRECTA?</label>
                                     <div class="form-line">
                                        <select class='form-control' id='resp_correcta'>
                                           <option value=" ">SELECCIONE</option>
@@ -492,8 +473,25 @@ if(isset($_SESSION['id'])){
         // // Menú
         // $("#menu_app").load('../template/menu.html');
 
+        $("#text_opcion").hide();
+        $("#arch_opcion").hide();
 
-                
+
+            $("#tipo").change(function(){
+                var tipo = $("#tipo").val();
+                  if(tipo==1){
+                    $("#text_opcion").show();
+                    $("#arch_opcion").hide();
+                  }else if(tipo==2){
+                    $("#text_opcion").hide();
+                    $("#arch_opcion").show();
+                  }else{
+                    $("#text_opcion").hide();
+                     $("#arch_opcion").hide();
+                  } 
+            });
+
+
                  $("#nombre_plan").html($.get("nombre"));
 
                   $("#guardar").click(function(){
@@ -503,11 +501,16 @@ if(isset($_SESSION['id'])){
                         var id_pregunta= id;
                         var user = 2;
                         var resp_correcta = $("#resp_correcta").val();
+                        var tipo = $("#tipo").val();
 
                         var datos ='g_plantilla='+1+'&crear_opcion='+1+'&nombre='+nombre+'&id_pregunta='+id_pregunta+'&valor='+valor+'&resp_correcta='+resp_correcta;
 
-                            if(nombre!=""){
-
+                            if(tipo !=""){
+                                  if(tipo == 1 && nombre==""){
+                                       alert("Ingrese los campos con asterísco(*)");
+                                       return false;
+                                  }
+                                
                                     $.ajax({
                                             type:"POST",
                                             url: "../../app/modelos/funciones.php",
@@ -579,7 +582,7 @@ if(isset($_SESSION['id'])){
                                     });
 
                             }else{
-                                swal("","Ingrese los campos con asterísco(*)","warning");
+                               alert("Seleccione tipo de opción");
                             }
                 });
     });

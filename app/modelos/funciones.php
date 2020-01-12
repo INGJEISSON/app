@@ -14,9 +14,9 @@ include('model_user.php'); // Modelos de usuario
             echo $forgot_password = forgot_password($_POST['usuario']);
         }
 
-        if(isset($_POST['g_plantilla'])){ // Gestor de usuario
+        // if(isset($_POST['g_plantilla'])){ // Gestor de usuario
 
-        }
+        // }
 
         if(isset($_POST['g_users'])){ // Gestor resolución de examen
            // echo "entro aquí";
@@ -56,12 +56,15 @@ include('model_user.php'); // Modelos de usuario
          if(isset($_GET['listar_opciones'])){ // Ver opciones
                 ver_opciones($_GET['id']);
          }
-
+         if(isset($_GET['listar_users'])){ // Listar usuarios
+                 ver_usuarios();
+         }
+         
         if(isset($_POST['g_plantilla'])){ // Gestor de plantillas
            
             if(isset($_POST['crear'])){ // Crear plantilla
 
-                $crear = crear_plantilla($_POST['nombre'], $_POST['descripcion'], $_POST['tipo'], $_POST['estado'], $_POST['user']);
+                $crear = crear_plantilla($_POST['nombre'], $_POST['descripcion'], $_POST['tipo'], $_POST['estado'], $_POST['user'], $_POST['cant_preguntas']);
                 echo $crear;
             }
             if(isset($_POST['crear_pregunta'])){
